@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog-auth-mongo-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blog-auth-mongo
+  template:
+    metadata:
+      labels:
+        app: blog-auth-mongo
+    spec:
+      containers:
+        - name: blog-auth-mongo
+          image: mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blog-auth-mongo-srv
+spec:
+  selector:
+    app: blog-auth-mongo
+  ports:
+    - name: db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017

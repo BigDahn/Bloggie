@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog-comment-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blog-comment
+  template:
+    metadata:
+      labels:
+        app: blog-comment
+    spec:
+      containers:
+        - name: blog-comment
+          image: bigdahn/blog-comment
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://blog-comment-mongo-srv:27017/blog-comment'
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URI
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLIENT_ID
+              value: bloggie
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blog-comment-srv
+spec:
+  selector:
+    app: blog-comment
+  ports:
+    - name: blog-comment
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

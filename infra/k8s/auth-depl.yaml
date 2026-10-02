@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog-auth-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blog-auth
+  template:
+    metadata:
+      labels:
+        app: blog-auth
+    spec:
+      containers:
+        - name: blog-auth
+          image: bigdahn/blog-auth
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://blog-auth-mongo-srv:27017/blog-auth'
+            - name: ACCESS_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: access-secret
+                  key: ACCESS_TOKEN_SECRET
+            - name: REDIS_HOST
+              value: redis-srv
+            - name: REDIS_PORT
+              value: '6379'
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: bloggie
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blog-auth-srv
+spec:
+  selector:
+    app: blog-auth
+  ports:
+    - name: blog-auth
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
