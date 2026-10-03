@@ -28,7 +28,7 @@ const setup = async () => {
   await ProcessedEvent.createProcessedEvent({
     commentId: data.commentId,
   });
-  // @ts-ignore
+  // @ts-expect-error: Message type requires additional NATS fields for a full mock
   const msg: Message = {
     ack: jest.fn(),
   };

@@ -1,4 +1,3 @@
-import { resolve } from 'node:dns';
 import { app } from './app';
 import mongoose from 'mongoose';
 import { DatabaseConnectionError } from '@bloggie/library';

@@ -6,7 +6,9 @@
   "scripts": {
     "start": "tsx watch src/index.ts",
     "test": "jest --watchAll --no-cache",
-    "test:ci": "jest"
+    "test:ci": "jest",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "jest": {
     "preset": "ts-jest",
@@ -46,13 +48,16 @@
     "tsx": "^4.23.13"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/jest": "^30.0.0",
     "@types/node": "^26.5.0",
     "@types/supertest": "^7.2.1",
+    "eslint": "^10.12.0",
     "jest": "^30.5.1",
     "mongodb-memory-server": "^11.2.0",
     "supertest": "^7.2.2",
     "ts-jest": "^29.4.12",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.71.0"
   }
 }

@@ -46,7 +46,8 @@ const userSchema = new mongoose.Schema(
   },
   {
     toJSON: {
-      transform(doc: any, ret: Record<string, any>) {
+      transform(ret: Record<string, any>) {
+        // eslint-disable-line @typescript-eslint/no-explicit-any
         ret.id = ret._id;
         delete ret._id;
         delete ret.password;

@@ -30,7 +30,8 @@ const setup = async () => {
   };
 
   // create a fake message object
-  // @ts-ignore
+
+  // @ts-expect-error: Message type requires additional NATS fields for a full mock
   const msg: Message = {
     ack: jest.fn(),
   };

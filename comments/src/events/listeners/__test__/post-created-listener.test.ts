@@ -12,7 +12,7 @@ const setup = async () => {
     postId: new mongoose.Types.ObjectId().toHexString(),
   };
 
-  //@ts-ignore
+  // @ts-expect-error: Message type requires additional NATS fields for a full mock
   const msg: Message = {
     ack: jest.fn(),
   };

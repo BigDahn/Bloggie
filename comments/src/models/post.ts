@@ -6,7 +6,7 @@ interface PostAttrs {
 
 interface PostDocs extends mongoose.Document {
   postId: string;
-  isDeleted: Boolean;
+  isDeleted: boolean;
 }
 
 interface PostModel extends mongoose.Model<PostDocs> {

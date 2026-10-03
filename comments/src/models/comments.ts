@@ -13,7 +13,7 @@ interface CommentDocs extends mongoose.Document {
   comment: string;
   userId: string;
   parentCommentId?: string;
-  isDeleted: Boolean;
+  isDeleted: boolean;
   createdAt: string;
   updatedAt: string;
 }

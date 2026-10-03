@@ -1,8 +1,6 @@
-import { AckHandlerCallback } from 'node-nats-streaming';
-
 export const natsWrapper = {
   client: {
-    publish: jest.fn().mockImplementation((data: string) => {
+    publish: jest.fn().mockImplementation(() => {
       return 'guid';
     }),
   },

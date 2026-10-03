@@ -39,7 +39,7 @@ const refreshSchema = new mongoose.Schema(
   },
   {
     toJSON: {
-      transform(doc: any, ret: Record<string, any>) {
+      transform(ret: Record<string, unknown>) {
         delete ret._id;
       },
     },

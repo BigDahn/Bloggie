@@ -7,7 +7,7 @@ declare global {
   var signin: () => Promise<string[]>;
 }
 
-let mongo: any;
+let mongo: MongoMemoryServer;
 
 beforeAll(async () => {
   process.env.ACCESS_TOKEN_SECRET = 'asdflkjhg';
@@ -21,7 +21,7 @@ beforeEach(async () => {
   if (mongoose.connection.db) {
     const collections = await mongoose.connection.db.collections();
 
-    for (let collection of collections) {
+    for (const collection of collections) {
       await collection.deleteMany({});
     }
   }

@@ -8,7 +8,7 @@ it('throws an error if an authorized user tries to request for a refresh token',
 it('successfully sends a refresh token', async () => {
   const cookie = await global.signin();
 
-  const response = await request(app)
+  await request(app)
     .post('/api/users/refresh')
     .set('Cookie', cookie)
     .send()

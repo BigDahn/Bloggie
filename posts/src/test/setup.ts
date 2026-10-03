@@ -1,17 +1,16 @@
-import jwt from "jsonwebtoken";
-import { MongoMemoryServer } from "mongodb-memory-server";
-import request from "supertest";
-import mongoose from "mongoose";
-import { app } from "../app";
+import jwt from 'jsonwebtoken';
+import { MongoMemoryServer } from 'mongodb-memory-server';
+
+import mongoose from 'mongoose';
 
 declare global {
   var signin: (id?: string) => string[];
 }
 
-let mongo: any;
+let mongo: MongoMemoryServer;
 
 beforeAll(async () => {
-  process.env.ACCESS_TOKEN_SECRET = "asdflkjhg";
+  process.env.ACCESS_TOKEN_SECRET = 'asdflkjhg';
   mongo = await MongoMemoryServer.create();
   const mongoUri = mongo.getUri();
 
@@ -23,7 +22,7 @@ beforeEach(async () => {
   if (mongoose.connection.db) {
     const collections = await mongoose.connection.db.collections();
 
-    for (let collection of collections) {
+    for (const collection of collections) {
       await collection.deleteMany({});
     }
   }
@@ -39,8 +38,8 @@ afterAll(async () => {
 global.signin = (id?: string) => {
   const payload = {
     id: id || new mongoose.Types.ObjectId().toHexString(),
-    email: "test@test.com",
-    fullName: "Frost wayne",
+    email: 'test@test.com',
+    fullName: 'Frost wayne',
     verified: true,
   };
 

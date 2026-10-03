@@ -1,4 +1,4 @@
-import { NotFoundError, RequireAuth } from '@bloggie/library';
+import { RequireAuth } from '@bloggie/library';
 import express, { Request, Response } from 'express';
 import { Post } from '../models/posts';
 
