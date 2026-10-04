@@ -5,7 +5,7 @@ import { isDuplicateKeyError } from '../utils/mongo-error';
 
 const router = express.Router();
 
-router.post('/api/post/:postId/like', async (req, res) => {
+router.post('/api/posts/:postId/like', async (req, res) => {
   const postId = req.params.postId;
   try {
     await Like.build({

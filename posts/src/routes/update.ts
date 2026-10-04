@@ -13,7 +13,7 @@ import { natsWrapper } from '../nats-wrapper';
 const router = express.Router();
 
 router.put(
-  '/api/post/:id',
+  '/api/posts/:id',
   RequireAuth,
   [
     body('title').isString().withMessage('Every post must have a title'),

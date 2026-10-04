@@ -11,7 +11,7 @@ import { body } from 'express-validator';
 const router = express.Router();
 
 router.put(
-  '/api/comment/:commentId',
+  '/api/comments/:commentId',
   RequireAuth,
   [body('comment').isString().notEmpty().withMessage('This field is required')],
   ValidateRequest,
