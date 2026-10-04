@@ -5,7 +5,7 @@ import { natsWrapper } from '../../nats-wrapper';
 
 it('throws an error when an unauthorized user tries to creates a post', async () => {
   await request(app)
-    .post('/api/post')
+    .post('/api/posts')
     .send({
       userId: new mongoose.Types.ObjectId().toHexString(),
       title: 'Euphoria',
@@ -20,7 +20,7 @@ it('successfully creates a new post', async () => {
   const cookie = global.signin();
 
   await request(app)
-    .post('/api/post')
+    .post('/api/posts')
     .set('Cookie', cookie)
     .send({
       title: 'Euphoria',
@@ -34,7 +34,7 @@ it('throws an error when providing an invalid field ', async () => {
   const cookie = global.signin();
 
   await request(app)
-    .post('/api/post')
+    .post('/api/posts')
     .set('Cookie', cookie)
     .send({
       title: 'Euphoria',
@@ -48,7 +48,7 @@ it('throws an error when no field is provided ', async () => {
   const cookie = global.signin();
 
   await request(app)
-    .post('/api/post')
+    .post('/api/posts')
     .set('Cookie', cookie)
     .send({})
     .expect(400);
@@ -58,7 +58,7 @@ it('successfully publishes an event after the post was created', async () => {
   const cookie = global.signin();
 
   await request(app)
-    .post('/api/post')
+    .post('/api/posts')
     .set('Cookie', cookie)
     .send({
       title: 'Euphoria',

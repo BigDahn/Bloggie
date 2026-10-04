@@ -4,7 +4,7 @@ import { Post } from '../models/posts';
 
 const router = express.Router();
 
-router.delete('/api/post/:postId/unlike', async (req, res) => {
+router.delete('/api/posts/:postId/unlike', async (req, res) => {
   const postId = req.params.postId;
 
   const like = await Like.findOne({ postId, userId: req.user!.id });

@@ -6,7 +6,7 @@ import { Post } from '../../models/posts';
 
 it('throws an error when an unauthorized user tries to access the route', async () => {
   await request(app)
-    .put(`/api/post/${new mongoose.Types.ObjectId().toHexString()}`)
+    .put(`/api/posts/${new mongoose.Types.ObjectId().toHexString()}`)
     .send({
       title: 'The weekend',
       excerpt: 'Always gonna find a way',
@@ -19,7 +19,7 @@ it('an author successfully updates his post', async () => {
   const cookie = global.signin();
 
   const post1 = await request(app)
-    .post('/api/post')
+    .post('/api/posts')
     .set('Cookie', cookie)
     .send({
       title: 'The weekend',
@@ -29,7 +29,7 @@ it('an author successfully updates his post', async () => {
     .expect(201);
 
   const updatedPost = await request(app)
-    .put(`/api/post/${post1.body.id}`)
+    .put(`/api/posts/${post1.body.id}`)
     .set('Cookie', cookie)
     .send({
       title: 'The Weekend Special',
@@ -45,7 +45,7 @@ it('emits an event when a post is edited successfully', async () => {
   const cookie = global.signin();
 
   const post1 = await request(app)
-    .post('/api/post')
+    .post('/api/posts')
     .set('Cookie', cookie)
     .send({
       title: 'The weekend',
@@ -54,7 +54,7 @@ it('emits an event when a post is edited successfully', async () => {
     })
     .expect(201);
   await request(app)
-    .put(`/api/post/${post1.body.id}`)
+    .put(`/api/posts/${post1.body.id}`)
     .set('Cookie', cookie)
     .send({
       title: 'The Weekend Special',
@@ -78,7 +78,7 @@ it('throws an error when another person tries to edit another post', async () =>
   await post.save();
 
   await request(app)
-    .put(`/api/post/${post.id}`)
+    .put(`/api/posts/${post.id}`)
     .set('Cookie', cookie)
     .send({
       title: 'The Weekend Special',

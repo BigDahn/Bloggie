@@ -1,0 +1,40 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: bloggie.dev
+      http:
+        paths:
+          - path: /api/posts/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: blog-post-srv
+                port:
+                  number: 3000
+          - path: /api/users/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: blog-auth-srv
+                port:
+                  number: 3000
+          - path: /api/auth/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: blog-auth-srv
+                port:
+                  number: 3000
+          - path: /api/comments/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: blog-comment-srv
+                port:
+                  number: 3000

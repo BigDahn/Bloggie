@@ -13,7 +13,7 @@ it('author successfully deletes a post', async () => {
   const cookie = global.signin();
 
   const postResponse = await request(app)
-    .post('/api/post')
+    .post('/api/posts')
     .set('Cookie', cookie)
     .send({
       title: 'Euphoria',
@@ -32,7 +32,7 @@ it('author successfully deletes a post', async () => {
 it('emits an event after post has been deleted', async () => {
   const cookie = global.signin();
   const postResponse = await request(app)
-    .post('/api/post')
+    .post('/api/posts')
     .set('Cookie', cookie)
     .send({
       title: 'Euphoria',
