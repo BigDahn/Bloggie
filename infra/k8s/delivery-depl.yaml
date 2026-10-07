@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blod-delivery-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blog-delivery
+  template:
+    metadata:
+      labels:
+        app: blog-delivery
+    spec:
+      containers:
+        - name: blog-delivery
+          image: bigdahn/blog-delivery
+          env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: bloggie
+            - name: REDIS_HOST
+              value: redis-srv
+            - name: REDIS_PORT
+              value: '6379'

@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import { User } from '../models/user';
+import { v4 as uuidv4 } from 'uuid';
 
 import { OtpService } from '../services/otp-service';
 import { ValidateRequest, BadRequestError } from '@bloggie/library';
@@ -46,14 +47,13 @@ router.post(
 
     await user.save();
 
-
-
     // publish an event to the delivery service sending thr OTP to verify the user
     const otp = await OtpService.generateOtp(user.id);
 
     // publishing an event here
 
     new VerificationOtp(natsWrapper.client).publish({
+      id: uuidv4(),
       email: user.email,
       otp: otp,
     });

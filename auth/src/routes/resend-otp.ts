@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import { User } from '../models/user';
+import { v4 as uuidv4 } from 'uuid';
 
 import { OtpService } from '../services/otp-service';
 import { ValidateRequest, BadRequestError } from '@bloggie/library';
@@ -31,6 +32,7 @@ router.post(
     // publish an event with the otp and email
 
     new ResendOtpPublisher(natsWrapper.client).publish({
+      id: uuidv4(),
       email: user.email,
       otp: otp,
     });
