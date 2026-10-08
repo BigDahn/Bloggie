@@ -22,9 +22,9 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
-            - name: NATS_URI
+            - name: NATS_URL
               value: 'http://nats-srv:4222'
-            - name: NATS_CLIENT_ID
+            - name: NATS_CLUSTER_ID
               value: bloggie
 ---
 apiVersion: v1
