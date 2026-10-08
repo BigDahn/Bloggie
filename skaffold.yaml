@@ -6,21 +6,28 @@ build:
       context: auth
       sync:
         infer:
-          - "src/**/*.ts"
+          - 'src/**/*.ts'
       docker:
         dockerfile: Dockerfile
     - image: bigdahn/blog-post
       context: posts
       sync:
         infer:
-          - "src/**/*.ts"
+          - 'src/**/*.ts'
       docker:
         dockerfile: Dockerfile
     - image: bigdahn/blog-comment
       context: comments
       sync:
         infer:
-          - "src/**/*.ts"
+          - 'src/**/*.ts'
+      docker:
+        dockerfile: Dockerfile
+    - image: bigdahn/blog-delivery
+      context: delivery
+      sync:
+        infer:
+          - 'src/**/*.ts'
       docker:
         dockerfile: Dockerfile
   local:

@@ -1,5 +1,8 @@
+import { Email } from '../utils/email';
+
 const sendOtp = async (email: string, otp: string) => {
-  console.log(`Sending OTP ${otp} to email ${email}`);
+  const emailService = new Email(otp, email);
+  await emailService.send('otp-email-template', 'Your OTP for Bloggie App');
 };
 
 export { sendOtp };

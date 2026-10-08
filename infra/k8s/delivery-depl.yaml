@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: blod-delivery-depl
+  name: blog-delivery-depl
 spec:
   replicas: 1
   selector:
@@ -28,3 +28,23 @@ spec:
               value: redis-srv
             - name: REDIS_PORT
               value: '6379'
+            - name: EMAIL_HOST
+              valuefrom:
+                secretKeyRef:
+                  name: email-host
+                  key: EMAIL_HOST
+            - name: EMAIL_PORT
+              valuefrom:
+                secretKeyRef:
+                  name: email-port
+                  key: EMAIL_PORT
+            - name: EMAIL_USER
+              valuefrom:
+                secretKeyRef:
+                  name: email-user
+                  key: EMAIL_USER
+            - name: EMAIL_PASSWORD
+              valuefrom:
+                secretKeyRef:
+                  name: email-password
+                  key: EMAIL_PASSWORD
